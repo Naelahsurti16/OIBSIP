@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Fancy Calculator</title>
+  <style>
+    /* Styling for the body to include background image and centered content */
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: url('https://www.color-meanings.com/wp-content/uploads/2023/08/fluffy-pink-cloud-in-blue-sky-1536x1314.jpeg') no-repeat center center fixed; 
+      background-size: cover;
+      font-family: sans-serif;
+    }
+
+    .calculator {
+      display: flex;
+      flex-direction: column;
+      width: 320px;
+      background-color: rgba(255, 255, 255, 0.8); /* White with transparency */
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      margin-top: 20px; /* Added margin to separate from title */
+    }
+
+    #display {
+      padding: 20px;
+      font-size: 24px;
+      text-align: right;
+      border: none;
+      background-color: #e0f7fa; /* Very light blue background */
+      border-radius: 10px 10px 0 0;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      padding: 10px;
+    }
+
+    button {
+      padding: 15px 0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.3s;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    /* Color coding for different button types with pastel colors */
+    .number {
+      background-color: #FFB3BA; /* Light pink for numbers */
+    }
+
+    .operator {
+      background-color: #FFDFBA; /* Light orange for operators */
+    }
+
+    #clearDisplay {
+      background-color: #FFB3BA; /* Light pink for clear button */
+    }
+
+    #calculate {
+      background-color: #BAFFC9; /* Light green for equals button */
+      grid-column: span 2; /* Span two columns for equals button */
+    }
+
+    .title {
+      text-align: center;
+      margin: 20px;
+      font-size: 32px; /* Increased font size */
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="title">Welcome to WoodsyVogue Calculator!</div>
+  <div class="calculator">
+    <input type="text" id="display" readonly>
+    <div class="buttons">
+      <button class="operator" onclick="pressOperation('(')">(</button>
+      <button class="operator" onclick="pressOperation(')')">)</button>
+      <button class="operator" onclick="pressOperation('ans')">ans</button>
+      <button class="operator" id="clearDisplay" onclick="clearDisplay()">clear</button>
+
+      <button class="number" onclick="pressNumber(7)">7</button>
+      <button class="number" onclick="pressNumber(8)">8</button>
+      <button class="number" onclick="pressNumber(9)">9</button>
+      <button class="operator" onclick="pressOperation('/')">÷</button>
+
+      <button class="number" onclick="pressNumber(4)">4</button>
+      <button class="number" onclick="pressNumber(5)">5</button>
+      <button class="number" onclick="pressNumber(6)">6</button>
+      <button class="operator" onclick="pressOperation('*')">x</button>
+
+      <button class="number" onclick="pressNumber(1)">1</button>
+      <button class="number" onclick="pressNumber(2)">2</button>
+      <button class="number" onclick="pressNumber(3)">3</button>
+      <button class="operator" onclick="pressOperation('-')">-</button>
+
+      <button class="number" onclick="pressNumber(0)">0</button>
+      <button class="operator" onclick="pressOperation('%')">%</button>
+      <button class="operator" onclick="pressOperation('+')">+</button>
+      <button class="operator" id="calculate" onclick="pressEquals()">ENTER</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+    let ans = '';
+
+    function pressNumber(num) {
+      display.value += num;
+    }
+
+    function pressOperation(op) {
+      if (op === 'ans') {
+        display.value += ans;
+      } else {
+        display.value += ' ' + op + ' ';
+      }
+    }
+
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    function pressEquals() {
+      try {
+        ans = eval(display.value);
+        display.value = ans;
+      } catch {
+        display.value = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
